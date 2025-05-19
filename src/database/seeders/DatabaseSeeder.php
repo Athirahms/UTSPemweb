@@ -27,18 +27,21 @@ class DatabaseSeeder extends Seeder
         $admin = User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
+            'password' => 'password',
         ]);
         $admin->assignRole('admin');
 
         $dosen = User::factory()->create([
             'name' => 'Dosen',
             'email' => 'dosen@dosen.com',
+            'password' => 'password',
         ]);
         $dosen->assignRole('dosen');    
         
         $mahasiswa = User::factory()->create([
             'name' => 'Mahasiswa',
             'email' => 'mahasiswa@mahasiswa.com',
+            'password' => 'password',
         ]);
         $mahasiswa->assignRole('mahasiswa');
         
