@@ -1,11 +1,11 @@
-DatabaseSeeder.php
+
 
 <?php
 
 namespace Database\Seeders;
 
 use App\Models\User;
-use App\Models\Classroom;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,31 +24,24 @@ class DatabaseSeeder extends Seeder
 
     private function seedUsers(): void
     {
-        if (!User::where('email', 'admin@admin.com')->exists()) {
-            $users = User::factory()->createmany([
-                [
-                    'name' => 'Admin',
-                    'email' => 'admin@admin.com',
-                    'password' => bcrypt('password'),
-                ],
-                [
-                    'name' => 'Mahasiswa',
-                    'email' => 'mhs@admin.com',
-                    'password' => bcrypt('password'),
-                ],
-                [
-                    'name' => 'Dosen',
-                    'email' => 'dsn@admin.com',
-                    'password' => bcrypt('password'),
-                ],
-            ]);
+        $admin = User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'admin@admin.com',
+        ]);
+        $admin->assignRole('admin');
 
-            foreach ($users as $user) {
-                if ($user->email == 'admin@admin.com') {
-                    $user->assignRole('super_admin');
-                }
-            }
-        }
+        $dosen = User::factory()->create([
+            'name' => 'Dosen',
+            'email' => 'dosen@dosen.com',
+        ]);
+        $dosen->assignRole('dosen');    
+        
+        $mahasiswa = User::factory()->create([
+            'name' => 'Mahasiswa',
+            'email' => 'mahasiswa@mahasiswa.com',
+        ]);
+        $mahasiswa->assignRole('mahasiswa');
+        
     }
 
     private function callSeeders(): void {
